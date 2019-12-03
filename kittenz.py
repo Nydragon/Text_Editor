@@ -2,24 +2,26 @@
 from tkinter import *
 from PIL import Image
 import glob
-#import numpy as np
+import os
 import matplotlib.pyplot as plt
+from functools import partial
+
+dir_path = os.path.dirname(os.path.realpath(__file__))
+print(dir_path)
 
 def retrieve():
-	print(text.get("1.0", "end-1c"))
 	retrieve_text = text.get("1.0", "end-1c")
 	retrieve_entry = entry.get()
 
-	file = open(retrieve_entry+".txt", "w")
+	file = open(dir_path+"\\"+retrieve_entry+".txt", "w")
 	file.write(retrieve_text)
 
 def file_manager():
 	files = Tk()
 	files.title("files")
 	files.geometry("450x650")
-	txt_files = glob.glob("*.txt")
-	txt_buttons = glob.glob("*.txt")
-	print(txt_buttons)
+	txt_files = glob.glob(dir_path+"\\"+"*.txt")
+	txt_buttons = glob.glob(dir_path+"\\"+"*.txt")
 	y = 25
 
 	def open_file(index):
@@ -28,11 +30,11 @@ def file_manager():
 			print(char)
 
 	for x in range(0, len(txt_files)):
-		txt_buttons[x] = Button(files, text="open "+txt_files[x], command=open_file(x))
+		splited = txt_files[x].split("\\")
+		txt = "open "+splited[-1]
+		txt_buttons[x] = Button(files, text=txt, command=partial(open_file, x))
 		txt_buttons[x].place(x=75, y=y, width=300, height=25)
 		y += 35
-
-
 
 # On crée une fenêtre, racine de notre interface
 fenetre = Tk()
@@ -45,23 +47,8 @@ fenetre.resizable(width=False, height=False)
 text = Text(fenetre)
 text.place(x=75, y=75, width=500, height=500)
 
-# #on tente une image wesh, on veut un FUCKING CHATON TROP MIGNON
-# imgpil = Image.open("kitten.png")
-# # anciennement np.asarray
-# img = np.array(imgpil) # Transformation de l'image en tableau numpy
-# plt.imshow(img)
-# plt.show()
-
 #couleur du texte
 var_choix = StringVar()
-
-# Déclarer les boutons
-# choix_rouge = Radiobutton(fenetre, text="Rouge", variable=var_choix, value="Rouge")
-# choix_rouge.place(x=130, y=20, width=75, height=25)
-# choix_vert = Radiobutton(fenetre, text="Vert", variable=var_choix, value="Vert")
-# choix_vert.place(x=200, y=20, width=75, height=25)
-# choix_bleu = Radiobutton(fenetre, text="Bleu", variable=var_choix, value="Bleu")
-# choix_bleu.place(x=280, y=20, width=75, height=25)
 
 # permet de récupérer les données d'une entrée
 var_choix.get()
