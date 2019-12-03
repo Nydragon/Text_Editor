@@ -47,12 +47,6 @@ fenetre.resizable(width=False, height=False)
 text = Text(fenetre)
 text.place(x=75, y=75, width=500, height=500)
 
-#couleur du texte
-var_choix = StringVar()
-
-# permet de récupérer les données d'une entrée
-var_choix.get()
-
 load_file = Button(fenetre, text="open file", command=file_manager)
 load_file.place(x=75, y=20, width=117.5, height=25)
 
