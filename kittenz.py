@@ -31,7 +31,7 @@ def file_manager():
 		for char in test:
 			print(char)
 
-	mylist = Listbox(files, width=20, height=2, yscrollcommand = scrollbar.set )
+	mylist = Listbox(files, height=2, width=20, yscrollcommand = scrollbar.set )
 
 	for x in range(0, len(txt_files)):
 		splited = txt_files[x].split("\\")
@@ -41,13 +41,14 @@ def file_manager():
 		# txt_buttons[x] = Button(files, text=txt, command=partial(open_file, x))
 		# txt_buttons[x].place(x=75, y=y, width=300, height=25)
 		# y += 35
-	mylist.pack( side = LEFT, fill = BOTH )
-	scrollbar.config( command = mylist.yview )
+	mylist.pack(side=LEFT, fill=BOTH)
+	scrollbar.config(command=mylist.yview)
 
 	def OnButtonClick():
 	 selection = mylist.curselection()
 	 index = selection[0]
-	 print(txt_files[index])
+	 file = open(txt_files[index], "r")
+	 print(file.read())
 
 	button = Button(files, text=u"test", command=OnButtonClick)
 	button.place(x=200, y=100, height=25, width=50)
