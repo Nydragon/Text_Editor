@@ -19,7 +19,9 @@ def retrieve():
 def file_manager():
 	files = Tk()
 	files.title("files")
-	files.geometry("450x650")
+	files.geometry("400x225")
+	scrollbar = Scrollbar(files)
+	scrollbar.pack( side = RIGHT, fill = Y )
 	txt_files = glob.glob(dir_path+"\\"+"*.txt")
 	txt_buttons = glob.glob(dir_path+"\\"+"*.txt")
 	y = 25
@@ -29,12 +31,28 @@ def file_manager():
 		for char in test:
 			print(char)
 
+	mylist = Listbox(files, width=20, height=2, yscrollcommand = scrollbar.set )
+
 	for x in range(0, len(txt_files)):
 		splited = txt_files[x].split("\\")
 		txt = "open "+splited[-1]
-		txt_buttons[x] = Button(files, text=txt, command=partial(open_file, x))
-		txt_buttons[x].place(x=75, y=y, width=300, height=25)
-		y += 35
+		mylist.insert(END, txt)
+
+		# txt_buttons[x] = Button(files, text=txt, command=partial(open_file, x))
+		# txt_buttons[x].place(x=75, y=y, width=300, height=25)
+		# y += 35
+	mylist.pack( side = LEFT, fill = BOTH )
+	scrollbar.config( command = mylist.yview )
+
+	def OnButtonClick():
+	 selection = mylist.curselection()
+	 index = selection[0]
+	 print(txt_files[index])
+
+	button = Button(files, text=u"test", command=OnButtonClick)
+	button.place(x=200, y=100, height=25, width=50)
+	# print(txt_files[int(mylist.curselection()[0])])
+	# btn = Button(top, text = "delete", command = lambda listbox=listbox: listbox.open(ANCHOR))
 
 # On crée une fenêtre, racine de notre interface
 fenetre = Tk()
