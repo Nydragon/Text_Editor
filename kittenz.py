@@ -19,7 +19,7 @@ def retrieve():
 def file_manager():
 	files = Tk()
 	files.title("files")
-	files.geometry("400x225")
+	files.geometry("400x200")
 	scrollbar = Scrollbar(files)
 	scrollbar.pack( side = RIGHT, fill = Y )
 	txt_files = glob.glob(dir_path+"\\"+"*.txt")
@@ -35,24 +35,32 @@ def file_manager():
 
 	for x in range(0, len(txt_files)):
 		splited = txt_files[x].split("\\")
-		txt = "open "+splited[-1]
+		txt = splited[-1]
 		mylist.insert(END, txt)
 
 		# txt_buttons[x] = Button(files, text=txt, command=partial(open_file, x))
 		# txt_buttons[x].place(x=75, y=y, width=300, height=25)
 		# y += 35
-	mylist.pack( side = LEFT, fill = BOTH )
-	scrollbar.config( command = mylist.yview )
+	mylist.pack(side=LEFT, fill=BOTH)
+	scrollbar.config(command=mylist.yview)
 
-	def OnButtonClick():
-	 selection = mylist.curselection()
-	 index = selection[0]
-	 print(txt_files[index])
+	def openFile():
+		selection = mylist.curselection()
+		index = selection[0]
+		print(txt_files[index])
 
-	button = Button(files, text=u"test", command=OnButtonClick)
-	button.place(x=200, y=100, height=25, width=50)
-	# print(txt_files[int(mylist.curselection()[0])])
-	# btn = Button(top, text = "delete", command = lambda listbox=listbox: listbox.open(ANCHOR))
+	def deleteFile():
+		selection = mylist.curselection()
+		index = selection[0]
+		os.remove(txt_files[index])
+		print(index)
+		mylist.delete(index)
+		mylist.selection_clear(index)
+
+	buttonOpen = Button(files, text="open", command=openFile)
+	buttonOpen.place(x=200, y=100, height=25, width=50)
+	buttonDelete = Button(files, text="delete", command=deleteFile)
+	buttonDelete.place(x=250, y=100, height=25, width=50)
 
 # On crée une fenêtre, racine de notre interface
 fenetre = Tk()
@@ -65,7 +73,7 @@ fenetre.resizable(width=False, height=False)
 text = Text(fenetre)
 text.place(x=75, y=75, width=500, height=500)
 
-load_file = Button(fenetre, text="open file", command=file_manager)
+load_file = Button(fenetre, text="manage file", command=file_manager)
 load_file.place(x=75, y=20, width=117.5, height=25)
 
 contenu = Button(fenetre, text="save", command=retrieve)
