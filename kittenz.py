@@ -19,19 +19,19 @@ def retrieve():
 def file_manager():
 	files = Tk()
 	files.title("files")
-	files.geometry("400x200")
+	files.geometry("0x185")
 	scrollbar = Scrollbar(files)
 	scrollbar.pack( side = RIGHT, fill = Y )
 	txt_files = glob.glob(dir_path+"\\"+"*.txt")
 
-	mylist = Listbox(files, height=2, width=20, yscrollcommand = scrollbar.set )
+	mylist = Listbox(files, height=10, width=16, yscrollcommand=scrollbar.set)
 
 	for x in range(0, len(txt_files)):
 		splited = txt_files[x].split("\\")
 		txt = splited[-1]
 		mylist.insert(END, txt)
 
-	mylist.pack(side=LEFT, fill=BOTH)
+	mylist.place(x=0, y=0)
 	scrollbar.config(command=mylist.yview)
 
 	def openFile():
@@ -53,9 +53,9 @@ def file_manager():
 		mylist.delete(index)
 
 	buttonOpen = Button(files, text="open", command=openFile)
-	buttonOpen.place(x=200, y=100, height=25, width=50)
+	buttonOpen.place(x=50, y=162.5, height=25, width=50)
 	buttonDelete = Button(files, text="delete", command=deleteFile)
-	buttonDelete.place(x=250, y=100, height=25, width=50)
+	buttonDelete.place(x=0, y=162.5, height=25, width=50)
 
 # On crée une fenêtre, racine de notre interface
 fenetre = Tk()
