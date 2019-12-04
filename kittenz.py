@@ -64,6 +64,12 @@ fenetre.title('Text editor by Gwen, Laurinnnnne et Nico')
 fenetre.geometry('650x650')
 fenetre.resizable(width=False, height=False)
 
+C = Canvas(fenetre, bg="blue", height=250, width=300)
+filename = PhotoImage(file = "lots-of-cats.png")
+background_label = Label(fenetre, image=filename)
+background_label.place(x=0, y=0, relwidth=1, relheight=1)
+C.pack()
+
 #zone de texte
 text = Text(fenetre)
 text.place(x=75, y=75, width=500, height=500)
