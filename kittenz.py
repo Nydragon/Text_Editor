@@ -31,7 +31,7 @@ def file_manager():
 		for char in test:
 			print(char)
 
-	mylist = Listbox(files, width=20, height=2, yscrollcommand = scrollbar.set )
+	mylist = Listbox(files, height=2, width=20, yscrollcommand = scrollbar.set )
 
 	for x in range(0, len(txt_files)):
 		splited = txt_files[x].split("\\")
