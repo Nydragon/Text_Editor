@@ -23,13 +23,6 @@ def file_manager():
 	scrollbar = Scrollbar(files)
 	scrollbar.pack( side = RIGHT, fill = Y )
 	txt_files = glob.glob(dir_path+"\\"+"*.txt")
-	txt_buttons = glob.glob(dir_path+"\\"+"*.txt")
-	y = 25
-
-	def open_file(index):
-		test = open(txt_files[index])
-		for char in test:
-			print(char)
 
 	mylist = Listbox(files, height=2, width=20, yscrollcommand = scrollbar.set )
 
@@ -38,24 +31,26 @@ def file_manager():
 		txt = splited[-1]
 		mylist.insert(END, txt)
 
-		# txt_buttons[x] = Button(files, text=txt, command=partial(open_file, x))
-		# txt_buttons[x].place(x=75, y=y, width=300, height=25)
-		# y += 35
 	mylist.pack(side=LEFT, fill=BOTH)
 	scrollbar.config(command=mylist.yview)
 
 	def openFile():
+		insert_index=0
 		selection = mylist.curselection()
 		index = selection[0]
-		print(txt_files[index])
+		file = open(txt_files[index], "r")
+		text.insert(1.0, file.read())
+		splited = txt_files[x].split("\\")
+		splited = splited[-1].split(".")
+		name = splited[0]
+		entry.insert(1, name)
 
 	def deleteFile():
 		selection = mylist.curselection()
 		index = selection[0]
 		os.remove(txt_files[index])
-		print(index)
-		mylist.delete(index)
 		mylist.selection_clear(index)
+		mylist.delete(index)
 
 	buttonOpen = Button(files, text="open", command=openFile)
 	buttonOpen.place(x=200, y=100, height=25, width=50)
@@ -65,7 +60,7 @@ def file_manager():
 # On crée une fenêtre, racine de notre interface
 fenetre = Tk()
 fenetre.config(cursor="clock red red")
-fenetre.title('save it as .txt you retard')
+fenetre.title('Text editor by Gwen, Laurinnnnne et Nico')
 fenetre.geometry('650x650')
 fenetre.resizable(width=False, height=False)
 
