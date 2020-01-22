@@ -1,9 +1,10 @@
-# Text Editor, old name Kittenz2
+# Text Editor
 
 Original Repository
  - https://github.com/adatechschool/Kittenz
-  - We did not have the rights to commit etc. and had to fork it.
+   - We did not have the rights to commit etc. and had to fork it.
  - https://github.com/adatechschool/Kittenz2
 
 
-Editeur de Texte par Florian et Marine. Repris par Gwénaëlle, Nicolas et Laurine. En théorie il y a des chats super mignons un peu partout.
+Text editor with a writing field and an option to save the current "file" with a custom name,
+a managment section -> load, save, delete.
