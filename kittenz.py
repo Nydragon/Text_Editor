@@ -13,7 +13,7 @@ def retrieve():
 	retrieve_text = text.get("1.0", "end-1c")
 	retrieve_entry = entry.get()
 
-	file = open(dir_path+"\\"+retrieve_entry+".txt", "w")
+	file = open(dir_path+"/"+retrieve_entry+".txt", "w")
 	file.write(retrieve_text)
 
 def file_manager():
@@ -22,12 +22,12 @@ def file_manager():
 	files.geometry("0x185")
 	scrollbar = Scrollbar(files)
 	scrollbar.pack( side = RIGHT, fill = Y )
-	txt_files = glob.glob(dir_path+"\\"+"*.txt")
+	txt_files = glob.glob(dir_path+"/"+"*.txt")
 
 	mylist = Listbox(files, height=10, width=16, yscrollcommand=scrollbar.set)
 
 	for x in range(0, len(txt_files)):
-		splited = txt_files[x].split("\\")
+		splited = txt_files[x].split("/")
 		txt = splited[-1]
 		mylist.insert(END, txt)
 
@@ -40,7 +40,7 @@ def file_manager():
 		index = selection[0]
 		file = open(txt_files[index], "r")
 		text.insert(1.0, file.read())
-		splited = txt_files[x].split("\\")
+		splited = txt_files[x].split("/")
 		splited = splited[-1].split(".")
 		name = splited[0]
 		entry.insert(1, name)
@@ -66,7 +66,7 @@ fenetre.resizable(width=False, height=False)
 
 
 C = Canvas(fenetre, bg="blue", height=250, width=300)
-filename = PhotoImage(file = dir_path+"\\lots-of-cats.png")
+filename = PhotoImage(file = dir_path+"/lots-of-cats.png")
 background_label = Label(fenetre, image=filename)
 background_label.place(x=0, y=0, relwidth=1, relheight=1)
 C.pack()
